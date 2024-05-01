@@ -4,6 +4,8 @@ const SchemaPersonagens = new Schema({
     nome: String,
     urlImagem: String,
     descricacao: String
+}, { 
+    timestamps: true 
 });
 
-export default SchemaPersonagens;
+export default model ("Personagem", SchemaPersonagens);
