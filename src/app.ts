@@ -1,5 +1,5 @@
-import express from "express";
-import mongoose from "mongoose";
+import  express from 'express';
+import mongoose from  'mongoose'
 
 class App {
     public express: express.Application
@@ -16,7 +16,7 @@ class App {
 
     public async database() { 
         try {
-            await mongoose.connect('mongodb://127.0.0.1:27017/test')
+            await mongoose.connect('mongodb://127.0.0.1:27017/Marvel')
             console.log("Conectado ao banco de dados")
         } catch (error) {
             console.log("Erro ao conectar com o banco de dados:", error)
