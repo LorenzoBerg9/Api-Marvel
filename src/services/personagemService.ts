@@ -1,7 +1,8 @@
-import Personagem from '../models/personagem';
+import SchemaPersonagens from '../schema/personagem';
+import { personagensType } from "";
 
 export default class PersonagemService {
-    private personagens: Personagem[] = []; 
+    private personagens: SchemaPersonagens[] = []; 
 
     async getAll(): Promise<Personagem[]> {
         try {
