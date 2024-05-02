@@ -1,9 +1,8 @@
-import { Request, Response, response } from 'express'
+import { Request, Response } from 'express'
 import ServiceCategoria from "../services/comic.service"
 import axios from 'axios'
 import { TypeComics } from '../types/comic.type'
 import comicService from '../services/comic.service'
-import { json } from 'stream/consumers'
 
 class ControllerComics {
 

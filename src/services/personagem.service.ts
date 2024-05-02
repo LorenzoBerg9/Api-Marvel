@@ -1,7 +1,5 @@
-import { Schema, model, Document } from 'mongoose';
 import SchemaPersonagens from '../schema/personagem.schema';
 import { TypePersonagens } from '../types/personagem.type';
-import { error } from 'console';
 import personagemSchema from '../schema/personagem.schema';
 
 class personagemServices {
@@ -26,6 +24,15 @@ class personagemServices {
                 urlImagem: personagens.urlImagem
             }, { new: true });
             return updatepersonagem;
+        } catch {
+            throw new Error('Error');
+        }
+    }
+
+    async findById(id: string) {
+        try {
+            const findedPersonagens = await personagemSchema.findById(id);
+            return findedPersonagens;
         } catch {
             throw new Error('Error');
         }
