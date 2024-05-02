@@ -1,76 +1,79 @@
-import { Schema, model, Document } from 'mongoose';
-import SchemaComic from '../schema/comic.schema';
+import { error } from "console";
+import Schemacomics from "../schema/comic.schema";
 import { TypeComics } from "../types/comic.type";
+import comicSchema from "../schema/comic.schema";
 
-export default class ComicsService {
+class ServiceCategoria {
 
-    async criarNovoItem(novoItem: TypeComics) {
+    async create(TypeComics: TypeComics) {
         try {
-            const itemCriado = await SchemaComic.create(novoItem);
-            return itemCriado;
-        } catch (error) {
-            console.error('Erro ao criar um novo item:', error);
-            throw error;
+            const comics = await Schemacomics.create(TypeComics)
+            return comics
+        } catch {
+            throw new Error('Error');
         }
     }
 
-    async buscarTodosItens() {
+    async delete(id: string) {
         try {
-            const itens = await SchemaComic.find();
-            return itens;
-        } catch (error) {
-            console.error('Erro ao buscar todos os itens:', error);
-            throw error;
+            const deletecomics = await Schemacomics.findByIdAndDelete(id)
+            return "HQ removida"
+        } catch {
+            throw new Error('Error');
         }
     }
 
-    async atualizarItemPorId(id: string, novosDados: TypeComics) {
+    async PrimeiraLetraDoNome(letra: string) {
         try {
-            const itemAtualizado = await SchemaComic.findByIdAndUpdate(id, novosDados, { new: true });
-            return itemAtualizado;
-        } catch (error) {
-            console.error('Erro ao atualizar o item pelo ID:', error);
-            throw error;
+            const comics = await Schemacomics.find({ titulo: { $regex: `^${letra}`, $options: 'i' } });
+            return comics;
+        } catch {
+            throw new Error('Error');
         }
     }
 
-    async removerItemPorId(id: string) {
+    async dataPubli() {
         try {
-            const itemRemovido = await SchemaComic.findByIdAndDelete(id);
-            return "Item Removido";
-        } catch (error) {
-            console.error('Erro ao remover o item pelo ID:', error);
-            throw error;
+            const dataPubli = await Schemacomics.find({}, { _id: 0, dataPublicacao: 1 });
+            return dataPubli;
+        } catch {
+            throw new Error('Error');
         }
     }
 
-    async buscarDatasPublicacao() {
+    async BuscaPorDesc() {
         try {
-            const datasPublicacao = await SchemaComic.find({}, { _id: 0, dataPublicacao: 1 });
-            return datasPublicacao;
-        } catch (error) {
-            console.error('Erro ao buscar as datas de publicação:', error);
-            throw error;
+            const comics = await Schemacomics.find({ $where: 'this.descricao.length > 50' });
+            return comics;
+        } catch {
+            throw new error("erro de busca")
         }
     }
 
-    async buscarPorLetraInicial(letra: string) {
+    async update(id: string, comics: TypeComics) {
         try {
-            const itens = await SchemaComic.find({ titulo: { $regex: `^${letra}`, $options: 'i' } });
-            return itens;
-        } catch (error) {
-            console.error('Erro ao buscar itens pela letra inicial do título:', error);
-            throw error;
+            const updateComics = await Schemacomics.findByIdAndUpdate(id, {
+                titulo: comics.titulo,
+                descricacao: comics.descricacao,
+                dataPublicacao: comics.dataPublicacao,
+                capa: comics.capa
+            }, {
+                new: true
+            })
+            return updateComics;
+        } catch {
+            throw new Error('Error');
         }
     }
 
-    async buscarPorDescricaoLonga() {
-        try {
-            const itens = await SchemaComic.find({ $where: 'this.descricao.length > 50' });
-            return itens;
-        } catch (error) {
-            console.error('Erro ao buscar itens por descrição longa:', error);
-            throw new Error('Erro ao buscar itens por descrição longa.');
+    async findAll(){
+        try{
+            const comics = await Schemacomics.find()
+            return comics;
+        } catch{
+            throw new Error('Error');
         }
     }
 }
+
+export default new ServiceCategoria();
