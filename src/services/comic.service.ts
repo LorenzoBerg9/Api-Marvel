@@ -1,7 +1,6 @@
-import { error } from "console";
 import Schemacomics from "../schema/comic.schema";
 import { TypeComics } from "../types/comic.type";
-import comicSchema from "../schema/comic.schema";
+
 
 class ServiceCategoria {
 
@@ -46,7 +45,7 @@ class ServiceCategoria {
             const comics = await Schemacomics.find({ $where: 'this.descricao.length > 50' });
             return comics;
         } catch {
-            throw new error("erro de busca")
+            throw new Error("erro de busca")
         }
     }
 

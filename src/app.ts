@@ -1,5 +1,6 @@
 import  express from 'express';
 import mongoose from  'mongoose'
+import { routes } from './routes'
 
 class App {
     public express: express.Application
@@ -8,6 +9,7 @@ class App {
         this.express = express()
         this.middleware()
         this.database()
+        this.routes()
     }
 
     public middleware() {
@@ -21,6 +23,9 @@ class App {
         } catch (error) {
             console.log("Erro ao conectar com o banco de dados:", error)
         }
+    }
+    public routes() {
+        this.express.use(routes)
     }
 }
 

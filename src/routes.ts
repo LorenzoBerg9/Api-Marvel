@@ -2,10 +2,10 @@ import { Router } from "express";
 import ControllerComic from "./controller/ControllerComic";
 import ControlerCriadores from './controller/ControllerCriadores'
 import ControllerPersonagem from './controller/ControllerPersonagem'
-import comicService from "./services/comic.service";
 
 const routes = Router();
 
+routes.get('/teste', ControllerComic.teste);
 routes.post('/create-comics', ControllerComic.create)
 routes.put('/comics/:id', ControllerComic.update)
 routes.delete('/comics/delete/:id', ControllerComic.delete)
