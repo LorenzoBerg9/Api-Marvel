@@ -5,7 +5,6 @@ import ControllerPersonagem from './controller/ControllerPersonagem'
 
 const routes = Router();
 
-routes.get('/teste', ControllerComic.teste);
 routes.post('/create-comics', ControllerComic.create)
 routes.put('/comics/:id', ControllerComic.update)
 routes.delete('/comics/delete/:id', ControllerComic.delete)
