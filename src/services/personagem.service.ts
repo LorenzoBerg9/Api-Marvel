@@ -5,6 +5,9 @@ import { error } from 'console';
 import personagemSchema from '../schema/personagem.schema';
 
 class personagemServices {
+    caminhoImagem() {
+        throw new Error('Method not implemented.');
+    }
     async create(personagemType: TypePersonagens) {
         try {
             const personagens = await SchemaPersonagens.create(personagemType);
