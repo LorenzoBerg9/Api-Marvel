@@ -2,9 +2,6 @@ import axios from 'axios';
 import { Request, Response } from 'express'
 import { TypePersonagens } from '../types/personagem.type';
 import personagemServices from '../services/personagem.service';
-import { resourceUsage } from 'process';
-
-
 
 class ControllerPersonagem {
 
@@ -44,6 +41,16 @@ class ControllerPersonagem {
             const personagem = await personagemServices.create(req.body)
             res.status(201)
             return res.json(personagem)
+        } catch {
+            throw new Error('Error');
+        }
+    }
+
+    async findById(req: Request, res: Response) {
+        try {
+            const personagem = await personagemServices.findById(req.params.id);
+            res.status(200)
+            return res.json(personagem);
         } catch {
             throw new Error('Error');
         }

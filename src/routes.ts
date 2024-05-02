@@ -18,7 +18,9 @@ routes.get('/inserir-criadores', ControlerCriadores.buscarCriadores)
 routes.get('/criadores', ControlerCriadores.findAll)
 
 routes.get('/inserir-personagens', ControllerPersonagem.buscarPersonagem)
-routes.get('/personagens/:id', ControllerPersonagem.findAll)
+routes.get('/personagens/:id', ControllerPersonagem.findById)
+routes.get('/personagens/:nome', ControllerPersonagem.buscarpersonagemPeloNome);
+routes.get('/personagens', ControllerPersonagem.findAll)
 routes.delete("/personagens/delete/:id", ControllerPersonagem.delete)
 routes.post('/create-personagem', ControllerPersonagem.create)
 routes.put('/personagem/:id', ControllerPersonagem.update)
