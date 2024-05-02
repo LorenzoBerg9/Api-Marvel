@@ -9,9 +9,9 @@ class ControllerPersonagem {
 
     async buscarPersonagem(req:Request, res:Response){
         try{
-            const url = 'https://gateway.marvel.com:443/v1/public/series/3613/characters?apikey=15a747d5deefa91aeccf500bdd134ec4&ts=1&hash=b6a2d4722e1cd059c793dbd627db048b'
-            const response = await axios.get(url)
-            const responseData = response.data.data.results;
+            const url = await fetch('https://gateway.marvel.com:443/v1/public/series/3613/characters?apikey=15a747d5deefa91aeccf500bdd134ec4&ts=1&hash=b6a2d4722e1cd059c793dbd627db048b');
+            const dataUrl = await url.json();
+            const responseData = dataUrl.data.results;
 
             for(const resultData of responseData) {
                 const personagem : TypePersonagens = {
@@ -26,6 +26,6 @@ class ControllerPersonagem {
             throw new Error('Error')
         }
     } 
-
-
 }
+
+export default new ControllerPersonagem();
