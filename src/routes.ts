@@ -1,40 +1,48 @@
 import { Router } from "express";
-import ControllerComic from "./controller/ControllerComic";
-import ControlerCriadores from './controller/ControllerCriadores'
-import ControllerPersonagem from './controller/ControllerPersonagem'
+import comicController from "./controllers/comic.controller";
+import criadoresController from './controllers/criadores.controller'
+import personagemController from './controllers/pesonagem.controller'
 
 const routes = Router();
+// COMICS
+routes.post('/fetch-comics', comicController.fetchMarvelComics)
+routes.post('/comics', comicController.create)
+// routes.get('/inserir-comics', comicController.buscaPorDesc) finalizar
+routes.get('/comics/:id', comicController.findById)
+routes.get('/comics', comicController.findAll)
+routes.put('/comics/:id', comicController.update)
+routes.delete('/comics/:id', comicController.delete)
 
-routes.post('/create-comics', ControllerComic.create)
-routes.put('/comics/:id', ControllerComic.update)
-routes.delete('/comics/delete/:id', ControllerComic.delete)
-routes.get('/inserir-comics', ControllerComic.BuscaPorDesc)
-routes.get('/comics', ControllerComic.findAll)
 
-routes.post('/create-criadores', ControlerCriadores.create)
-routes.put('/criadores/:id', ControlerCriadores.update)
-routes.delete('/criadores/delete/:id', ControlerCriadores.delete)
-routes.get('/inserir-criadores', ControlerCriadores.buscarCriadores)
-routes.get('/criadores', ControlerCriadores.findAll)
+// CRIADORES
+routes.post('/fetch-criadores', criadoresController.fetchMarvelCriadores)
+routes.post('/criadores', criadoresController.create)
+routes.get('/criadores/:id', criadoresController.findById)
+routes.get('/criadores', criadoresController.findAll)
+routes.put('/criadores/:id', criadoresController.update)
+routes.delete('/criadores/:id', criadoresController.delete)
 
-routes.get('/inserir-personagens', ControllerPersonagem.buscarPersonagem)
-routes.get('/personagens/:id', ControllerPersonagem.findById)
-routes.get('/personagens/:nome', ControllerPersonagem.buscarpersonagemPeloNome);
-routes.get('/personagens', ControllerPersonagem.findAll)
-routes.delete("/personagens/delete/:id", ControllerPersonagem.delete)
-routes.post('/create-personagem', ControllerPersonagem.create)
-routes.put('/personagem/:id', ControllerPersonagem.update)
+
+// PERSONAGENS
+routes.post('/fetch-personagens', personagemController.fetchMarvelCharacters)
+routes.post('/personagens', personagemController.create)
+routes.get('/personagens/:id', personagemController.findById)
+routes.get('/personagensName/:nome', personagemController.findByName)
+routes.get('/personagens', personagemController.findAll)
+routes.put('/personagem/:id', personagemController.update)
+routes.delete("/personagens/:id", personagemController.delete)
+
+
 
 //AUXILIARES: 
-
-routes.get('/publicacao', ControllerComic.dataPubli);
-routes.get('/BuscaPordescricao', ControllerComic.BuscaPorDesc);
-routes.get('/maisdecinco', ControlerCriadores.Maisdecinco);
-routes.get('/PrimeiraLetraComic/:letra', ControllerComic.PrimeiraLetraDoNome);
-routes.get('/buscarCriador/:funcao', ControlerCriadores.Funcao);
-routes.get('/bucarImagemPersonagem', ControllerPersonagem.caminhoImagem);
-routes.get('/primeiraLetraCriador/:letra', ControlerCriadores.PrimeiraLetraDoNome);
-routes.get('/buscaPersonagem/:nome', ControllerPersonagem.buscarpersonagemPeloNome);
+routes.get('/publicacao', comicController.dataPubli);
+routes.get('/BuscaPordescricao', comicController.buscaPorDesc);
+routes.get('/moreThan/:numberHQ', criadoresController.moreThan);
+routes.get('/PrimeiraLetraComic/:letra', comicController.firstLetterOfName);
+routes.get('/buscarCriador/:funcao', criadoresController.criadorFunctionInHQ);
+routes.get('/bucarImagemPersonagem/:nome', personagemController.findImagePathUrl);
+routes.get('/primeiraLetraCriador/:letra', criadoresController.firstLetterOfName);
+routes.get('/buscaPersonagem/:nome', personagemController.findByName);
 
 
 export{

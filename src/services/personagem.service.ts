@@ -1,29 +1,12 @@
-import SchemaPersonagens from '../schema/personagem.schema';
 import { TypePersonagens } from '../types/personagem.type';
-import personagemSchema from '../schema/personagem.schema';
+import personagemSchema from '../schemas/personagem.schema';
 
 class personagemServices {
-    caminhoImagem() {
-        throw new Error('Method not implemented.');
-    }
+
     async create(personagemType: TypePersonagens) {
         try {
-            const personagens = await SchemaPersonagens.create(personagemType);
-            return personagens;
-        } catch {
-            throw new Error('Error');
-        }
-    }
-
-
-    async update(id: string, personagens: TypePersonagens) {
-        try {
-            const updatepersonagem = await SchemaPersonagens.findByIdAndUpdate(id, {
-                nome: personagens.nome,
-                descricacao: personagens.descricacao,
-                urlImagem: personagens.urlImagem
-            }, { new: true });
-            return updatepersonagem;
+            const novoPersonagem = await personagemSchema.create(personagemType);
+            return novoPersonagem;
         } catch {
             throw new Error('Error');
         }
@@ -31,49 +14,58 @@ class personagemServices {
 
     async findById(id: string) {
         try {
-            const findedPersonagens = await personagemSchema.findById(id);
-            return findedPersonagens;
+            const personagemId = await personagemSchema.findById(id);
+            return personagemId;
         } catch {
             throw new Error('Error');
         }
     }
 
-    async findAll() {
+    async findByName(name: string) {
         try {
-            const findedPersonagens = await personagemSchema.find()
-            return findedPersonagens;
-        } catch {
-            throw new Error('Error');
-        }
-    }
-
-
-    async buscarpersonagemPorNome(name: string) {
-        try {
-            const personagem = await SchemaPersonagens.find
+            const personagem = await personagemSchema.find
                 ({ nome: name })
+                return personagem;
         } catch {
             throw new Error('Error')
         }
     }
 
+    async findAll() {
+        try {
+            const personagens = await personagemSchema.find()
+            return personagens;
+        } catch {
+            throw new Error('Error');
+        }
+    }
+
+    async update(id: string, personagem: TypePersonagens) {
+        try {
+            const personagemAtualizado = await personagemSchema.findByIdAndUpdate(id, {
+                nome: personagem.nome,
+                descricacao: personagem.descricacao,
+                urlImagem: personagem.urlImagem
+            }, { new: true });
+            return personagemAtualizado;
+        } catch {
+            throw new Error('Error');
+        }
+    }
+
     async delete(id: string) {
         try {
-            const deletePersonagem = await SchemaPersonagens.findByIdAndDelete(id)
-            return "user deleted"
+            const deletePersonagem = await personagemSchema.findByIdAndDelete(id)
+            return deletePersonagem
         } catch (error) {
             throw new Error("Error")
         }
     }
 
-
-    async returnImage() {
+    async returnImage(nome: string) {
         try {
-            const personagem = await SchemaPersonagens.find({},
-                {
-                    urlImagem: 1
-                })
-            return personagem;
+            const personagem = await this.findByName(nome);
+            return personagem[0].urlImagem;
         } catch {
             throw new Error("Error")
         }

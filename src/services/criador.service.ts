@@ -1,36 +1,29 @@
-import { StringifyOptions } from "querystring";
-import SchemaCriadores from "../schema/criador.schema";
+import schemaCriadores from "../schemas/criador.schema";
 import { TypeCriador } from "../types/criador.type";
 
 class ServiceCriadores {
 
     async create(TypeCriador: TypeCriador) {
         try {
-            const criadores = await SchemaCriadores.create(TypeCriador)
-            return criadores
+            const novoCriador = await schemaCriadores.create(TypeCriador)
+            return novoCriador;
         } catch {
             throw new Error('Error');
         }
     }
 
-
-    async update(id: string, criadores: TypeCriador) {
+    async findById(id: string) {
         try {
-            const updatecriadores = await SchemaCriadores.findByIdAndUpdate(id, {
-                nome: criadores.nome,
-                funcao: criadores.funcao,
-                HQfeitas: criadores.HQfeitas
-            },
-                { new: true })
-            return updatecriadores;
+            const criadorId = await schemaCriadores.findById(id);
+            return criadorId
         } catch {
             throw new Error('Error');
         }
     }
 
-    async PrimeiraLetraDoNome(letra: String) {
+    async firstLetterOfName(letra: String) {
         try {
-            const criadores = await SchemaCriadores.find({ nome: { $regex: `^${letra}`, $options: 'i' } });
+            const criadores = await schemaCriadores.find({ nome: { $regex: `^${letra}`, $options: 'i' } });
             return criadores;
         } catch {
             throw new Error('Error');
@@ -39,8 +32,22 @@ class ServiceCriadores {
 
     async findAll() {
         try {
-            const criadores = await SchemaCriadores.find()
+            const criadores = await schemaCriadores.find()
             return criadores;
+        } catch {
+            throw new Error('Error');
+        }
+    }
+
+    async update(id: string, criadores: TypeCriador) {
+        try {
+            const updateCriadores = await schemaCriadores.findByIdAndUpdate(id, {
+                nome: criadores.nome,
+                funcao: criadores.funcao,
+                HQfeitas: criadores.HQfeitas
+            },
+                { new: true })
+            return updateCriadores;
         } catch {
             throw new Error('Error');
         }
@@ -48,25 +55,26 @@ class ServiceCriadores {
 
     async delete(id: string) {
         try {
-            const deleteCriadores = await SchemaCriadores.findByIdAndDelete(id)
-            return "O criador foi removido"
+            const deleteCriadores = await schemaCriadores.findByIdAndDelete(id)
+            return deleteCriadores;
         } catch {
             throw new Error('Error');
         }
     }
 
-    async Maisdecinco() {
+    async moreThan(numberHQ: string) {
+        const valor = parseInt(numberHQ)
         try {
-            const criadores = await SchemaCriadores.find({ HQfeitas: { $gt: 20 } });
+            const criadores = await schemaCriadores.find({ HQfeitas: { $gt: 5 } });
             return criadores;
         } catch {
             throw new Error('Error');
         }
     }
 
-    async Funcao(funcao: string) {
+    async criadorFunctionInHQ(funcao: string) {
         try {
-            const criadores = await SchemaCriadores.find({ funcao: funcao });
+            const criadores = await schemaCriadores.find({ funcao: funcao });
             return criadores;
         } catch {
             throw new Error('Error');
