@@ -1,8 +1,10 @@
 import app from "./app";
 
+const PORT = 3001;
+
 function main(){
-    app.listen(3001, 'localhost', () => {
-        console.log("servidor rondando na porta 3000")
+    app.listen(PORT, 'localhost', () => {
+        console.log(`servidor rondando na porta ${PORT}`)
     })
 }
 
