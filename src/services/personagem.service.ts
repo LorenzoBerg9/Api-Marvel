@@ -7,7 +7,7 @@ class personagemServices {
         try {
             const novoPersonagem = await personagemSchema.create(personagemType);
             return novoPersonagem;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -16,7 +16,7 @@ class personagemServices {
         try {
             const personagemId = await personagemSchema.findById(id);
             return personagemId;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -26,7 +26,7 @@ class personagemServices {
             const personagem = await personagemSchema.find
                 ({ nome: name })
                 return personagem;
-        } catch {
+        } catch (error: any){
             throw new Error('Error')
         }
     }
@@ -35,7 +35,7 @@ class personagemServices {
         try {
             const personagens = await personagemSchema.find()
             return personagens;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -48,7 +48,7 @@ class personagemServices {
                 urlImagem: personagem.urlImagem
             }, { new: true });
             return personagemAtualizado;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -57,7 +57,7 @@ class personagemServices {
         try {
             const deletePersonagem = await personagemSchema.findByIdAndDelete(id)
             return deletePersonagem
-        } catch (error) {
+        } catch (error: any) {
             throw new Error("Error")
         }
     }
@@ -66,7 +66,7 @@ class personagemServices {
         try {
             const personagem = await this.findByName(nome);
             return personagem[0].urlImagem;
-        } catch {
+        } catch (error: any) {
             throw new Error("Error")
         }
     }

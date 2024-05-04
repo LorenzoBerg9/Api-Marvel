@@ -44,18 +44,14 @@ class ControllerPersonagem {
             res.status(500).json('Erro ao buscar personagem(s)');
         }
     }
-
     async findByName(req: Request, res: Response) {
         try {
             const nome = req.params.nome;
-            const personagem = await personagemServices.findByName(nome);
-
-            if (personagem.length == 0) {
-                return res.status(404).json("Personagem não encontrado");
-            }
-            return res.status(200).json(personagem)
+            const personagem = await personagemServices.findByName(nome)
+            res.status(200)
+            return res.json(personagem)
         } catch (error: any) {
-            res.status(500).json('Erro ao buscar personagem');
+            console.error(error);
         }
     }
 
@@ -85,6 +81,7 @@ class ControllerPersonagem {
             res.status(500).json('Erro ao deletar personagem');
         }
     }
+
 
     async findImagePathUrl(req: Request, res: Response) {
         try {

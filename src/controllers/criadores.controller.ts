@@ -65,7 +65,7 @@ class ControlerCriadores {
     async update(req: Request, res: Response) {
         try {
             const criadores = await serviceCriadores.update(req.params.id, req.body);
-            return res.status(201).json(criadores);
+            return res.status(200).json(criadores);
         } catch (error: any) {
             res.status(500).json(error.message);
         }
@@ -74,7 +74,7 @@ class ControlerCriadores {
     async delete(req: Request, res: Response) {
         try {
             const criadores = await serviceCriadores.delete(req.params.id);
-            return res.status(201).json(criadores);
+            return res.status(204).json(criadores);
         } catch (error: any) {
             res.status(500).json(error.message);
         }

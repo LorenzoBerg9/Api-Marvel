@@ -25,7 +25,7 @@ class ControllerComics {
                 };
                 await ServiceCategoria.create(novaDataComics);
             } return res.status(200).json('Comics API Marvel criadas com sucesso');
-        } catch (error) {
+        } catch (error: any) {
             res.status(500).json('Erro ao buscar comic Marvel');
         }
     }
@@ -60,7 +60,7 @@ class ControllerComics {
     async update(req: Request, res: Response) {
         try {
             const comics = await comicService.update(req.params.id, req.body);
-            return res.status(201).json(comics);
+            return res.status(200).json(comics);
         } catch (error:any) {
             res.status(500).json(error.message);
         }
@@ -69,7 +69,7 @@ class ControllerComics {
     async delete(req: Request, res: Response) {
         try {
             const comics = await comicService.delete(req.params.id);
-            return res.status(201).json(comics);
+            return res.status(204).json(comics);
         } catch (error:any) {
             res.status(500).json(error.message);
         }

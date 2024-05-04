@@ -8,7 +8,7 @@ class ServiceCategoria {
         try {
             const comics = await schemacomics.create(TypeComics)
             return comics
-        } catch (error) {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -17,7 +17,7 @@ class ServiceCategoria {
         try {
             const comicsId = await schemacomics.findById(id);
             return comicsId
-        } catch (error) {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -26,7 +26,7 @@ class ServiceCategoria {
         try{
             const comics = await schemacomics.find()
             return comics;
-        } catch (error) {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -42,7 +42,7 @@ class ServiceCategoria {
                 new: true
             })
             return updateComics;
-        } catch (error) {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -51,7 +51,7 @@ class ServiceCategoria {
         try {
             const deletecomics = await schemacomics.findByIdAndDelete(id)
             return "HQ removida"
-        } catch (error) {
+        } catch (error: any) {
             throw new Error('Error');
         }
     }
@@ -60,7 +60,7 @@ class ServiceCategoria {
         try {
             const comics = await schemacomics.find({ titulo: { $regex: `^${letra}`, $options: 'i' } });
             return comics;
-        } catch (error) {
+        } catch (error: any) {
             throw new Error('Error');
         }
     }
@@ -69,7 +69,7 @@ class ServiceCategoria {
         try {
             const dataPubli = await schemacomics.find({}, { _id: 0, dataPublicacao: 1 });
             return dataPubli;
-        } catch (error) {
+        } catch (error: any) {
             throw new Error('Error');
         }
     }
@@ -78,7 +78,7 @@ class ServiceCategoria {
         try {
             const comics = await schemacomics.find({ $where: 'this.descricao.length > 50' });
             return comics;
-        } catch (error) {
+        } catch (error: any) {
             throw new Error("erro de busca")
         }
     }

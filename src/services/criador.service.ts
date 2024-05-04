@@ -7,7 +7,7 @@ class ServiceCriadores {
         try {
             const novoCriador = await schemaCriadores.create(TypeCriador)
             return novoCriador;
-        } catch {
+        } catch (error: any) {
             throw new Error('Error');
         }
     }
@@ -16,7 +16,7 @@ class ServiceCriadores {
         try {
             const criadorId = await schemaCriadores.findById(id);
             return criadorId
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -25,7 +25,7 @@ class ServiceCriadores {
         try {
             const criadores = await schemaCriadores.find({ nome: { $regex: `^${letra}`, $options: 'i' } });
             return criadores;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -34,7 +34,7 @@ class ServiceCriadores {
         try {
             const criadores = await schemaCriadores.find()
             return criadores;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -48,7 +48,7 @@ class ServiceCriadores {
             },
                 { new: true })
             return updateCriadores;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -57,7 +57,7 @@ class ServiceCriadores {
         try {
             const deleteCriadores = await schemaCriadores.findByIdAndDelete(id)
             return deleteCriadores;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -67,7 +67,7 @@ class ServiceCriadores {
         try {
             const criadores = await schemaCriadores.find({ HQfeitas: { $gt: valor } });
             return criadores;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
@@ -76,7 +76,7 @@ class ServiceCriadores {
         try {
             const criadores = await schemaCriadores.find({ funcao: funcao });
             return criadores;
-        } catch {
+        } catch (error: any){
             throw new Error('Error');
         }
     }
