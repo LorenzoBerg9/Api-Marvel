@@ -29,9 +29,9 @@ routes.delete("/personagens/:id", personagemController.delete)
 
 
 routes.get('/moreThan/:numberHQ', criadoresController.moreThan);
-routes.get('/PrimeiraLetraComic/:letra', comicController.firstLetterOfName); 
+routes.get('/primeiraLetraComic/:letra', comicController.firstLetterOfName); 
 routes.get('/buscarCriador/:funcao', criadoresController.criadorFunctionInHQ); 
-routes.get('/bucarImagemPersonagem/:nome', personagemController.findImagePathUrl); 
+routes.get('/buscarImagemPersonagem/:nome', personagemController.findImagePathUrl); 
 routes.get('/primeiraLetraCriador/:letra', criadoresController.firstLetterOfName); 
 
 
