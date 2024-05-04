@@ -65,7 +65,7 @@ class ServiceCriadores {
     async moreThan(numberHQ: string) {
         const valor = parseInt(numberHQ)
         try {
-            const criadores = await schemaCriadores.find({ HQfeitas: { $gt: 5 } });
+            const criadores = await schemaCriadores.find({ HQfeitas: { $gt: valor } });
             return criadores;
         } catch {
             throw new Error('Error');
