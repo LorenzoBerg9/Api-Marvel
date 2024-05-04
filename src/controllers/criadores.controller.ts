@@ -73,8 +73,8 @@ class ControlerCriadores {
 
     async delete(req: Request, res: Response) {
         try {
-            const criadores = await serviceCriadores.delete(req.params.id);
-            return res.status(201).json(criadores);
+            await serviceCriadores.delete(req.params.id);
+            return res.status(200).json("Criador deletado com sucesso");
         } catch {
             res.status(500).json('Erro ao deletar criador')
         }
