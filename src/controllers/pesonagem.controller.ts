@@ -86,7 +86,6 @@ class ControllerPersonagem {
     async findImagePathUrl(req: Request, res: Response) {
         try {
             const imagemPersonagem = await personagemServices.returnImage(req.params.nome);
-            res.status(200)
             res.status(200).json(imagemPersonagem)
         } catch (error: any) {
             res.status(500).json('Erro ao buscar url imagem');
