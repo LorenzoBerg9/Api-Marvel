@@ -174,12 +174,11 @@ describe("teste para rotas API", () => {
         const responsePersonagem = await request(app).post('/personagens').send(newPersonagem);
         expect(responsePersonagem.status).toBe(201);
         const nomePersonagem = 'TestePersonagem';
-        const response = await request(app).get(`/bucarImagemPersonagem/${nomePersonagem}`);
+        const response = await request(app).get(`/buscarImagemPersonagem/${nomePersonagem}`);
         const imagem = response.body;
         expect(response.status).toBe(200);
-        expect (imagem).toBe(`urlTesteROta`);
+        expect(imagem).toBe('urlTesteROta');
     });
-
 
     it('buscar comics por letra', async () => {
         const response = await request(app).get('/PrimeiraLetraComic/:letra');
