@@ -25,7 +25,7 @@ class ControllerComics {
                 };
                 await ServiceCategoria.create(novaDataComics);
             } return res.status(200).json('Comics API Marvel criadas com sucesso');
-        } catch {
+        } catch (error: any) {
             res.status(500).json('Erro ao buscar comic Marvel');
         }
     }
@@ -33,10 +33,9 @@ class ControllerComics {
     async create(req: Request, res: Response) {
         try {
             const comics = await comicService.create(req.body)
-            res.status(202)
-            return res.json(comics)
-        } catch {
-            res.status(200).json('Erro ao criar comic');
+            res.status(201).json(comics)
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -44,8 +43,8 @@ class ControllerComics {
         try {
             const comicId = await comicService.findById(req.params.id);
             return res.status(200).json(comicId);
-        } catch {
-            res.status(500).json('Erro ao buscar comics(s)');
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -53,45 +52,45 @@ class ControllerComics {
         try {
             const comics = await comicService.findAll()
             return res.status(200).json(comics);
-        } catch {
-            res.status(200).json('Erro ao buscar comics(s)');
+        } catch (error:any) {
+            res.status(500).json(error.message);
         }
     }
 
-    async update (req:Request, res:Response) {
-        try{
+    async update(req: Request, res: Response) {
+        try {
             const comics = await comicService.update(req.params.id, req.body);
-            return res.status(201).json(comics);
-        } catch {
-            res.status(200).json('Erro ao manipular comics');
+            return res.status(200).json(comics);
+        } catch (error:any) {
+            res.status(500).json(error.message);
         }
     }
 
     async delete(req: Request, res: Response) {
         try {
             const comics = await comicService.delete(req.params.id);
-            return res.status(201).json(comics);
-        } catch {
-            res.status(200).json('Erro ao manipular comics');
+            return res.status(204).json(comics);
+        } catch (error:any) {
+            res.status(500).json(error.message);
         }
     }
 
-    async firstLetterOfName (req: Request, res: Response){
-        try{
+    async firstLetterOfName(req: Request, res: Response) {
+        try {
             const letra = req.params.letra;
             const comics = await comicService.firstLetterOfName(letra);
             return res.status(200).json(comics);
-        } catch {
-            res.status(200).json('Erro ao manipular comics');
+        } catch (error:any) {
+            res.status(500).json(error.message);
         }
     }
-    
-    async dataPubli (req:Request, res:Response){
-        try{
+
+    async dataPubli(req: Request, res: Response) {
+        try {
             const dataPublicacao = await comicService.dataPubli();
             return res.status(200).json(dataPublicacao);
-        } catch {
-            res.status(200).json('Erro ao manipular comics');
+        } catch (error:any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -99,10 +98,10 @@ class ControllerComics {
         try {
             const comics = await comicService.buscaPorDesc();
             res.status(200).json(comics);
-        } catch {
-            res.status(200).json('Erro ao manipular comics');
+        } catch (error:any) {
+            res.status(500).json(error.message);
         }
-    }   
+    }
 }
 
-export default new ControllerComics ();
+export default new ControllerComics();

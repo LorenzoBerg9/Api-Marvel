@@ -6,11 +6,11 @@ import personagemController from './controllers/pesonagem.controller'
 const routes = Router();
 
 routes.post('/fetch-comics', comicController.fetchMarvelComics)
-routes.post('/comics', comicController.create)
+routes.post('/comics', comicController.create) 
 routes.get('/comics/:id', comicController.findById)
-routes.get('/comics', comicController.findAll)
+routes.get('/comics', comicController.findAll) 
 routes.put('/comics/:id', comicController.update)
-routes.delete('/comics/:id', comicController.delete)
+routes.delete('/comics/:id', comicController.delete) 
 
 routes.post('/fetch-criadores', criadoresController.fetchMarvelCriadores)
 routes.post('/criadores', criadoresController.create)
