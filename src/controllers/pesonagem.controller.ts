@@ -21,7 +21,7 @@ class ControllerPersonagem {
                 await personagemServices.create(personagem);
             }
             return res.status(201).json("Personagens API Marvel salvos com sucesso");
-        } catch {
+        } catch (error: any) {
             res.status(500).json('Erro ao buscar personagens na Marvel API');
         }
     }
@@ -30,7 +30,7 @@ class ControllerPersonagem {
         try {
             const novoPersonagem = await personagemServices.create(req.body)
             return res.status(201).json(novoPersonagem)
-        } catch {
+        } catch (error: any) {
             res.status(500).json('Erro ao criar personagem');
         }
     }
@@ -40,7 +40,7 @@ class ControllerPersonagem {
             const personagemId = await personagemServices.findById(req.params.id);
             console.log(personagemId);
             return res.status(200).json(personagemId);
-        } catch {
+        } catch (error: any) {
             res.status(500).json('Erro ao buscar personagem(s)');
         }
     }
@@ -54,7 +54,7 @@ class ControllerPersonagem {
                 return res.status(404).json("Personagem não encontrado");
             }
             return res.status(200).json(personagem)
-        } catch {
+        } catch (error: any) {
             res.status(500).json('Erro ao buscar personagem');
         }
     }
@@ -63,7 +63,7 @@ class ControllerPersonagem {
         try {
             const personagens = await personagemServices.findAll()
             return res.status(200).json(personagens);
-        } catch {
+        } catch (error: any) {
             res.status(500).json('Erro ao buscar personagem(s)');
         }
     }
@@ -72,7 +72,7 @@ class ControllerPersonagem {
         try {
             const personagemAtualizado = await personagemServices.update(req.params.id, req.body);
             return res.status(201).json(personagemAtualizado);
-        } catch {
+        } catch (error: any) {
             res.status(500).json('Erro ao atualizar personagem(s)');
         }
     }
@@ -80,8 +80,8 @@ class ControllerPersonagem {
     async delete(req: Request, res: Response) {
         try {
             await personagemServices.delete(req.params.id);
-            return res.status(200).json('Personagem deletado com sucesso');
-        } catch {
+            res.status(204).json('Personagem deletado com sucesso');
+        } catch (error: any) {
             res.status(500).json('Erro ao deletar personagem');
         }
     }
@@ -90,8 +90,8 @@ class ControllerPersonagem {
         try {
             const imagemPersonagem = await personagemServices.returnImage(req.params.nome);
             res.status(200)
-            return res.status(200).json(imagemPersonagem)
-        } catch {
+            res.status(200).json(imagemPersonagem)
+        } catch (error: any) {
             res.status(500).json('Erro ao buscar url imagem');
         }
     }

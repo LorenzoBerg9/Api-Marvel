@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { TypeCriador } from '../types/criador.type';
 import axios from 'axios';
-import  serviceCriadores  from "../services/criador.service"
+import serviceCriadores from "../services/criador.service"
 
 class ControlerCriadores {
 
@@ -20,8 +20,8 @@ class ControlerCriadores {
                 await serviceCriadores.create(criadornovo);
             }
             return res.status(201).json("Criadores API Marvel salvos com sucesso");
-        } catch {
-            res.status(500).json('Erro ao buscar criadores na Marvel API');
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -29,8 +29,8 @@ class ControlerCriadores {
         try {
             const criadores = await serviceCriadores.create(req.body)
             return res.status(201).json(criadores)
-        } catch {
-            res.status(500).json('Erro ao cadastrar criadores')
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -38,8 +38,8 @@ class ControlerCriadores {
         try {
             const criadorId = await serviceCriadores.findById(req.params.id);
             return res.status(200).json(criadorId);
-        } catch {
-            res.status(500).json('Erro ao buscar criador');
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -48,8 +48,8 @@ class ControlerCriadores {
             const letra = req.params.letra;
             const criadores = await serviceCriadores.firstLetterOfName(letra);
             return res.status(200).json(criadores);
-        } catch {
-            res.status(500).json('Error')
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -57,8 +57,8 @@ class ControlerCriadores {
         try {
             const criadores = await serviceCriadores.findAll()
             return res.status(200).json(criadores);
-        } catch {
-            res.status(500).json('Erro ao buscar criadores')
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -66,8 +66,8 @@ class ControlerCriadores {
         try {
             const criadores = await serviceCriadores.update(req.params.id, req.body);
             return res.status(201).json(criadores);
-        } catch {
-            res.status(500).json('Erro ao atualizar personagem');
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -75,8 +75,8 @@ class ControlerCriadores {
         try {
             const criadores = await serviceCriadores.delete(req.params.id);
             return res.status(201).json(criadores);
-        } catch {
-            res.status(500).json('Erro ao deletar criador')
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -84,8 +84,8 @@ class ControlerCriadores {
         try {
             const criadores = await serviceCriadores.moreThan(req.params.numeroHQ);
             return res.status(200).json(criadores);
-        } catch {
-            res.status(500).json('Erro ao coletar criadores por número de HQs')
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 
@@ -94,8 +94,8 @@ class ControlerCriadores {
             const funcao = req.params.funcao;
             const criadores = await serviceCriadores.criadorFunctionInHQ(funcao);
             return res.status(200).json(criadores);
-        } catch {
-            res.status(500).json('Erro ao coletar criador por função')
+        } catch (error: any) {
+            res.status(500).json(error.message);
         }
     }
 }

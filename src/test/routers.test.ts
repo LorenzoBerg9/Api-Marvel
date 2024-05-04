@@ -1,6 +1,7 @@
 import request from 'supertest';
 import app from '../app';
 
+
 describe("teste para rotas API", () => {
 
 
@@ -38,7 +39,7 @@ describe("teste para rotas API", () => {
 
     it("excluir um personagem ", async () => {
         const response = await request(app).delete('/personagens/:id');
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(204);
     });
 
     it("excluir criadores ", async () => {
@@ -153,5 +154,5 @@ describe("teste para rotas API", () => {
         expect(response.status).toBe(200);
     })
 
-    
+
 })
